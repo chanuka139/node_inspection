@@ -1,0 +1,25 @@
+Mount CentOS-7-x86_64-DVD-1908.iso
+create repo
+mkdir -p /mnt/centos7
+
+mount -o loop,ro /tmp/CentOS-7-x86_64-DVD-1908.iso /mnt/centos7/
+
+cat centos7.repo
+[centos7]
+name=centos7
+baseurl=file:///mnt/centos7
+gpgcheck=0
+enabled=1
+
+yum clean all
+
+yum --disablerepo=* --enablerepo=centos7 update
+yum --disablerepo=* --enablerepo=centos7 install pciutils
+yum --disablerepo=* --enablerepo=centos7 repolist
+
+yum --disablerepo=* --enablerepo=centos7 install OpenIPMI ipmitool
+
+
+ipmitool -I lanplus -H $host -Uroot -Pcalvin
+
+yum --disablerepo=* --enablerepo=centos7 install net-tools

@@ -1,0 +1,5 @@
+[centos7]
+name=centos7
+baseurl=file:///mnt/centos7
+gpgcheck=0
+enabled=1
